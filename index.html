@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김앤장가발 비대면 상담 신청서</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #f5f0eb;
+    color: #2c2c2c;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+  }
+
+  /* 헤더 */
+  .header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    margin-bottom: 24px;
+  }
+
+  .header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+  }
+
+  .header .subtitle {
+    font-size: 13px;
+    color: #888;
+    font-weight: 400;
+  }
+
+  .header .divider {
+    width: 40px;
+    height: 2px;
+    background: #b89a7b;
+    margin: 16px auto 0;
+  }
+
+  /* 안내문 */
+  .notice {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.8;
+    border: 1px solid #e8e2dc;
+  }
+
+  .notice .privacy {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #f0ebe5;
+    font-size: 12.5px;
+    color: #999;
+  }
+
+  .notice .privacy .icon { flex-shrink: 0; font-size: 14px; }
+
+  /* 섹션 */
+  .section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    border: 1px solid #e8e2dc;
+  }
+
+  .section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title .num {
+    width: 24px;
+    height: 24px;
+    background: #b89a7b;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* 입력 필드 */
+  .field { margin-bottom: 18px; }
+  .field:last-child { margin-bottom: 0; }
+
+  .field label {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+  }
+
+  .field label .required {
+    color: #c97b5a;
+    font-size: 11px;
+    margin-left: 4px;
+  }
+
+  .field label .optional {
+    color: #aaa;
+    font-size: 11px;
+    margin-left: 4px;
+    font-weight: 400;
+  }
+
+  .field .hint {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
+    background: #fafafa;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #b89a7b;
+    background: #fff;
+  }
+
+  textarea { resize: vertical; min-height: 80px; }
+
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  /* 체크박스 / 라디오 */
+  .options { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .option-item {
+    position: relative;
+  }
+
+  .option-item input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+  .option-item label.chip {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #fafafa;
+  }
+
+  .option-item input:checked + label.chip {
+    border-color: #b89a7b;
+    background: #b89a7b;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  /* 파일 업로드 */
+  .file-upload {
+    position: relative;
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #fafafa;
+  }
+
+  .file-upload:hover {
+    border-color: #b89a7b;
+    background: #fdf9f5;
+  }
+
+  .file-upload input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .file-upload .upload-icon { font-size: 24px; margin-bottom: 6px; }
+  .file-upload .upload-text { font-size: 13px; color: #888; }
+  .file-upload .upload-text strong { color: #b89a7b; }
+  .file-upload .file-name {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #b89a7b;
+    font-weight: 500;
+    display: none;
+  }
+
+  /* 요금 안내 */
+  .pricing {
+    background: #fdf9f5;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 12px;
+  }
+
+  .pricing table { width: 100%; border-collapse: collapse; }
+
+  .pricing th {
+    text-align: left;
+    font-size: 12px;
+    font-weight: 500;
+    color: #999;
+    padding: 4px 0;
+    border-bottom: 1px solid #ebe5de;
+  }
+
+  .pricing td {
+    font-size: 13px;
+    color: #555;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0ebe5;
+    vertical-align: top;
+  }
+
+  .pricing td:first-child { font-weight: 500; color: #333; width: 100px; }
+  .pricing td .badge {
+    display: inline-block;
+    background: #b89a7b;
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 4px;
+  }
+  .pricing td .sub { font-size: 11px; color: #aaa; display: block; margin-top: 2px; }
+
+  /* 제출 버튼 */
+  .submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: #b89a7b;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+  }
+
+  .submit-btn:hover { background: #a68968; }
+  .submit-btn:active { transform: scale(0.99); }
+
+  /* 하단 안내 */
+  .footer-notice {
+    margin-top: 20px;
+    padding: 0 4px;
+    font-size: 12px;
+    color: #aaa;
+    line-height: 1.8;
+  }
+
+  .footer-notice li {
+    list-style: none;
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .footer-notice li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+  }
+
+  /* 완료 화면 */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 80px 20px;
+  }
+
+  .success-screen .icon { font-size: 48px; margin-bottom: 16px; }
+  .success-screen h2 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+  .success-screen p { font-size: 14px; color: #888; line-height: 1.7; }
+
+  /* 반응형 */
+  @media (max-width: 480px) {
+    .container { padding: 12px 12px 32px; }
+    .section { padding: 20px 18px; }
+    .header h1 { font-size: 20px; }
+    .options { gap: 6px; }
+    .option-item label.chip { padding: 7px 13px; font-size: 12.5px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 헤더 -->
+  <div class="header">
+    <h1>김앤장가발</h1>
+    <p class="subtitle">비대면 상담 신청서</p>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 안내문 -->
+  <div class="notice">
+    아래 내용을 작성해주시면 확인 후 <strong>1영업일 이내</strong> 연락드리겠습니다.<br>
+    맞춤 제작 제품 특성상, 정확한 상담을 위해 <strong>사진 첨부</strong>를 꼭 부탁드립니다.
+    <div class="privacy">
+      <span class="icon">🔒</span>
+      <span>보내주신 사진은 상담 목적으로만 사용되며 절대 외부에 공개되지 않습니다.</span>
+    </div>
+  </div>
+
+  <form id="consultForm">
+
+    <!-- 1. 기본 정보 -->
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 기본 정보</div>
+
+      <div class="field">
+        <label>성함 <span class="required">필수</span></label>
+        <input type="text" name="name" required placeholder="홍길동">
+      </div>
+
+      <div class="field">
+        <label>연락처 <span class="required">필수</span></label>
+        <input type="tel" name="phone" required placeholder="010-0000-0000">
+      </div>
+
+      <div class="field">
+        <label>연령대 <span class="required">필수</span></label>
+        <select name="age" required>
+          <option value="" disabled selected>선택해주세요</option>
+          <option>30대 초반</option>
+          <option>30대 후반</option>
+          <option>40대 초반</option>
+          <option>40대 후반</option>
+          <option>50대 초반</option>
+          <option>50대 후반</option>
+          <option>60대 이상</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>거주 지역 <span class="required">필수</span></label>
+        <select name="region" required id="regionSelect">
+          <option value="" disabled selected>선택해주세요</option>
+          <option>서울</option>
+          <option>경기</option>
+          <option value="지방">그 외 지방</option>
+          <option>해외</option>
+        </select>
+        <input type="text" name="region_detail" id="regionDetail" placeholder="시/도를 입력해주세요" style="margin-top:8px; display:none;">
+      </div>
+    </div>
+
+    <!-- 2. 상담 희망 제품 -->
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> 상담 희망 제품</div>
+
+      <div class="field">
+        <label>어떤 제품을 상담받고 싶으신가요? <span class="required">필수</span></label>
+        <p class="hint">복수 선택 가능합니다</p>
+        <div class="options">
+          <div class="option-item">
+            <input type="checkbox" name="product" value="정수리 가발" id="p1">
+            <label class="chip" for="p1">정수리 가발</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" name="product" value="앞머리 가발 (한 줄 앞머리)" id="p2">
+            <label class="chip" for="p2">앞머리 가발</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" name="product" value="전체 가발" id="p3">
+            <label class="chip" for="p3">전체 가발</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" name="product" value="혼주 가발" id="p4">
+            <label class="chip" for="p4">혼주 가발</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" name="product" value="헤어피스" id="p5">
+            <label class="chip" for="p5">헤어피스</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" name="product" value="기타" id="p6">
+            <label class="chip" for="p6">기타</label>
+          </div>
+        </div>
+        <input type="text" name="product_etc" id="productEtc" placeholder="기타 제품을 입력해주세요" style="margin-top:10px; display:none;">
+      </div>
+    </div>
+
+    <!-- 3. 사진 첨부 -->
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> 사진 첨부</div>
+
+      <div class="field">
+        <label>정면 사진 <span class="required">필수</span></label>
+        <p class="hint">얼굴과 현재 머리 상태가 보이게 촬영해주세요</p>
+        <div class="file-upload">
+          <input type="file" name="photo_front" accept="image/*" required onchange="showFileName(this)">
+          <div class="upload-icon">📷</div>
+          <div class="upload-text"><strong>탭하여 사진 선택</strong></div>
+          <div class="file-name"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>이마·앞머리 부분 클로즈업 <span class="required">필수</span></label>
+        <p class="hint">이마 라인부터 보이게 가까이서 촬영해주세요</p>
+        <div class="file-upload">
+          <input type="file" name="photo_forehead" accept="image/*" required onchange="showFileName(this)">
+          <div class="upload-icon">📷</div>
+          <div class="upload-text"><strong>탭하여 사진 선택</strong></div>
+          <div class="file-name"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>정수리 부분 클로즈업 <span class="optional">해당 시에만</span></label>
+        <p class="hint">정수리 고민이신 경우에만 촬영해주세요</p>
+        <div class="file-upload">
+          <input type="file" name="photo_crown" accept="image/*" onchange="showFileName(this)">
+          <div class="upload-icon">📷</div>
+          <div class="upload-text"><strong>탭하여 사진 선택</strong></div>
+          <div class="file-name"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>자연광 머리 컬러 사진 <span class="required">필수</span></label>
+        <p class="hint">햇빛 아래에서 촬영해주세요 (실내 조명 X)</p>
+        <div class="file-upload">
+          <input type="file" name="photo_color" accept="image/*" required onchange="showFileName(this)">
+          <div class="upload-icon">☀️</div>
+          <div class="upload-text"><strong>탭하여 사진 선택</strong></div>
+          <div class="file-name"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 염색 정보 -->
+    <div class="section">
+      <div class="section-title"><span class="num">4</span> 염색 정보</div>
+
+      <div class="field">
+        <label>현재 사용 중인 염색약 <span class="optional">선택</span></label>
+        <p class="hint">브랜드명 + 호수 (예: 미쟝센 5N, 려 자연갈색)</p>
+        <input type="text" name="dye_info" placeholder="예: 미쟝센 5N">
+      </div>
+
+      <div class="field">
+        <label>염색약 사진 <span class="optional">선택</span></label>
+        <p class="hint">브랜드명과 호수가 보이게 촬영해주세요</p>
+        <div class="file-upload">
+          <input type="file" name="photo_dye" accept="image/*" onchange="showFileName(this)">
+          <div class="upload-icon">🎨</div>
+          <div class="upload-text"><strong>탭하여 사진 선택</strong></div>
+          <div class="file-name"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 고민 내용 -->
+    <div class="section">
+      <div class="section-title"><span class="num">5</span> 고민 내용</div>
+
+      <div class="field">
+        <label>어떤 고민이 있으신가요? <span class="optional">선택</span></label>
+        <textarea name="concern" placeholder="예: 정수리 볼륨이 없어서 고민, 앞머리가 비어 보여서, 혼주 머리 준비 등"></textarea>
+      </div>
+    </div>
+
+    <!-- 6. 상담 방식 -->
+    <div class="section">
+      <div class="section-title"><span class="num">6</span> 희망 상담 방식</div>
+
+      <div class="field">
+        <label>어떤 상담을 원하시나요? <span class="required">필수</span></label>
+        <div class="options" style="flex-direction: column;">
+          <div class="option-item">
+            <input type="radio" name="consult_type" value="전화 상담 (무료)" id="c1" required>
+            <label class="chip" for="c1" style="width:100%; text-align:center;">📞 전화 상담 (무료)</label>
+          </div>
+          <div class="option-item">
+            <input type="radio" name="consult_type" value="영상 상담 (유료)" id="c2">
+            <label class="chip" for="c2" style="width:100%; text-align:center;">🎥 영상 상담 (유료 · 구매 시 환급)</label>
+          </div>
+          <div class="option-item">
+            <input type="radio" name="consult_type" value="매장 방문 (유료)" id="c3">
+            <label class="chip" for="c3" style="width:100%; text-align:center;">🏠 매장 방문 예약 (유료 · 구매 시 환급)</label>
+          </div>
+        </div>
+
+        <div class="pricing">
+          <table>
+            <tr><th>상담 방식</th><th>요금</th></tr>
+            <tr>
+              <td>전화 상담</td>
+              <td>무료</td>
+            </tr>
+            <tr>
+              <td>영상 상담</td>
+              <td>최초 10분 2만원<span class="sub">10분 추가당 1만원 · 최대 30분</span></td>
+            </tr>
+            <tr>
+              <td>매장 방문</td>
+              <td>20분 3만원</td>
+            </tr>
+          </table>
+          <p style="font-size:11.5px; color:#b89a7b; margin-top:10px; font-weight:500;">
+            ※ 유료 상담은 선불 결제 후 예약이 확정됩니다.<br>
+            ※ 가발 구매 시 상담비가 전액 환급됩니다.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. 연락 가능 시간 -->
+    <div class="section">
+      <div class="section-title"><span class="num">7</span> 연락 가능 시간</div>
+
+      <div class="field">
+        <label>언제 연락드리면 될까요? <span class="required">필수</span></label>
+        <p class="hint">복수 선택 가능합니다</p>
+        <div class="options">
+          <div class="option-item">
+            <input type="checkbox" name="time" value="오전 (10시~12시)" id="t1">
+            <label class="chip" for="t1">오전 10~12시</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" name="time" value="오후 (12시~3시)" id="t2">
+            <label class="chip" for="t2">오후 12~3시</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" name="time" value="늦은 오후 (3시~6시)" id="t3">
+            <label class="chip" for="t3">오후 3~6시</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" name="time" value="상관없음" id="t4">
+            <label class="chip" for="t4">상관없음</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 제출 -->
+    <button type="submit" class="submit-btn">상담 신청하기</button>
+
+  </form>
+
+  <!-- 하단 안내 -->
+  <ul class="footer-notice">
+    <li>작성해주신 내용 확인 후 1영업일 이내 연락드리겠습니다.</li>
+    <li>영상 상담·매장 방문 상담은 유료이며, 가발 구매 시 상담비가 전액 환급됩니다.</li>
+    <li>유료 상담은 선불 결제 후 예약이 확정됩니다.</li>
+    <li>김앤장가발은 100% 수작업 맞춤 제작 제품으로, 주문 후 교환/환불이 불가합니다.</li>
+    <li>색상은 촬영 환경에 따라 실물과 차이가 있을 수 있으며, 상담 시 안내드리겠습니다.</li>
+    <li>보내주신 사진은 상담 목적으로만 사용되며 절대 외부에 공개되지 않습니다.</li>
+  </ul>
+
+  <!-- 완료 화면 -->
+  <div class="success-screen" id="successScreen">
+    <div class="icon">✅</div>
+    <h2>신청이 완료되었습니다</h2>
+    <p>
+      확인 후 1영업일 이내 연락드리겠습니다.<br>
+      감사합니다.
+    </p>
+  </div>
+
+</div>
+
+<script>
+  // 지방 선택 시 시/도 입력 표시
+  document.getElementById('regionSelect').addEventListener('change', function() {
+    const detail = document.getElementById('regionDetail');
+    detail.style.display = (this.value === '지방') ? 'block' : 'none';
+    if (this.value === '지방') detail.focus();
+  });
+
+  // 기타 제품 선택 시 입력 표시
+  document.getElementById('p6').addEventListener('change', function() {
+    const etc = document.getElementById('productEtc');
+    etc.style.display = this.checked ? 'block' : 'none';
+    if (this.checked) etc.focus();
+  });
+
+  // 파일명 표시
+  function showFileName(input) {
+    const nameEl = input.parentElement.querySelector('.file-name');
+    if (input.files.length > 0) {
+      nameEl.textContent = '✓ ' + input.files[0].name;
+      nameEl.style.display = 'block';
+      input.parentElement.style.borderColor = '#b89a7b';
+      input.parentElement.style.background = '#fdf9f5';
+    }
+  }
+
+  // 폼 제출
+  document.getElementById('consultForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // 제품 선택 확인
+    const products = document.querySelectorAll('input[name="product"]:checked');
+    if (products.length === 0) {
+      alert('상담 희망 제품을 선택해주세요.');
+      return;
+    }
+
+    // 시간 선택 확인
+    const times = document.querySelectorAll('input[name="time"]:checked');
+    if (times.length === 0) {
+      alert('연락 가능 시간을 선택해주세요.');
+      return;
+    }
+
+    // 완료 화면 표시
+    this.style.display = 'none';
+    document.querySelector('.notice').style.display = 'none';
+    document.querySelector('.footer-notice').style.display = 'none';
+    document.getElementById('successScreen').style.display = 'block';
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // TODO: 여기에 실제 데이터 전송 로직 추가
+    // 예: Google Sheets API, 이메일 전송, 서버 전송 등
+    console.log('폼 데이터:', new FormData(this));
+  });
+</script>
+
+</body>
+</html>
