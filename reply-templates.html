@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김앤장가발 — 답변 템플릿</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+            background: #f5f0eb;
+            color: #3a3a3a;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8b6f47, #a6895c);
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 14px;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .card-header:active {
+            background: #faf7f4;
+        }
+
+        .card-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-emoji {
+            font-size: 22px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f0eb;
+            border-radius: 10px;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #3a3a3a;
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+            color: #999;
+            margin-top: 1px;
+        }
+
+        .card-arrow {
+            font-size: 14px;
+            color: #bbb;
+            transition: transform 0.2s;
+        }
+
+        .card.open .card-arrow {
+            transform: rotate(90deg);
+        }
+
+        .card-body {
+            display: none;
+            padding: 0 18px 16px;
+        }
+
+        .card.open .card-body {
+            display: block;
+        }
+
+        .template-text {
+            background: #faf7f4;
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #3a3a3a;
+            white-space: pre-wrap;
+            word-break: keep-all;
+        }
+
+        .copy-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            margin-top: 10px;
+            padding: 12px;
+            background: linear-gradient(135deg, #8b6f47, #a6895c);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            transition: opacity 0.15s;
+        }
+
+        .copy-btn:active {
+            opacity: 0.85;
+        }
+
+        .copy-btn.copied {
+            background: #4a9e6e;
+        }
+
+        .divider {
+            text-align: center;
+            font-size: 12px;
+            color: #bbb;
+            margin: 20px 0 12px;
+            font-weight: 500;
+        }
+
+        .price-section {
+            background: white;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+        .price-section h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #8b6f47;
+        }
+
+        .price-table {
+            width: 100%;
+            font-size: 13px;
+            border-collapse: collapse;
+        }
+
+        .price-table th {
+            text-align: left;
+            padding: 8px 6px;
+            border-bottom: 2px solid #eee;
+            color: #888;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .price-table td {
+            padding: 8px 6px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .price-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+            color: #8b6f47;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 11px;
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>김앤장가발 답변 템플릿</h1>
+    <p>답변 펼치기 → 복사 버튼 누르기 → 붙여넣기</p>
+</div>
+
+<div class="container">
+
+    <!-- Template Cards -->
+    <div class="card" data-template="basic">
+        <div class="card-header" onclick="toggleCard(this)">
+            <div class="card-label">
+                <div class="card-emoji">💬</div>
+                <div>
+                    <div class="card-title">기본 문의</div>
+                    <div class="card-subtitle">가발 궁금해요 / 상담하고 싶어요</div>
+                </div>
+            </div>
+            <div class="card-arrow">▶</div>
+        </div>
+        <div class="card-body">
+            <div class="template-text">안녕하세요^^ 문의 주셔서 감사합니다. 모든 가발은 100% 맞춤 디자인임으로, 상담을 원하실 경우 전달드린 [상담 신청 설문지]를 작성해주시면 확인 후 개별로 연락 드릴 예정입니다! 감사합니다^^</div>
+            <button class="copy-btn" onclick="copyText(this)">📋 복사하기</button>
+        </div>
+    </div>
+
+    <div class="card" data-template="online">
+        <div class="card-header" onclick="toggleCard(this)">
+            <div class="card-label">
+                <div class="card-emoji">🛒</div>
+                <div>
+                    <div class="card-title">온라인 판매 문의</div>
+                    <div class="card-subtitle">온라인으로 살 수 있나요?</div>
+                </div>
+            </div>
+            <div class="card-arrow">▶</div>
+        </div>
+        <div class="card-body">
+            <div class="template-text">현재 온라인 판매는 하지 않고 있습니다! 매장 방문이 어려우실 경우 비대면 상담도 진행하고 있습니다. 상담을 원하실 경우 전달드린 [상담 신청 설문지]를 작성해주시면 확인 후 개별로 연락 드릴 예정입니다! 감사합니다^^</div>
+            <button class="copy-btn" onclick="copyText(this)">📋 복사하기</button>
+        </div>
+    </div>
+
+    <div class="card" data-template="bangs">
+        <div class="card-header" onclick="toggleCard(this)">
+            <div class="card-label">
+                <div class="card-emoji">💇‍♀️</div>
+                <div>
+                    <div class="card-title">한줄 앞머리 가발 가격</div>
+                    <div class="card-subtitle">앞머리 가발 얼마예요?</div>
+                </div>
+            </div>
+            <div class="card-arrow">▶</div>
+        </div>
+        <div class="card-body">
+            <div class="template-text">[한줄 앞머리 가발]은 매장에서 저희가 수작업으로 제작하는 100% 인모 제품이기에 기장에 따라 가격 차이가 있습니다:) 현재 영상에서 착용 중인 제품은 35만원 입니다! 자세한 상담을 원하실 경우 전달드린 [상담 신청 설문지]를 작성해주시면 확인 후 개별로 연락 드릴 예정입니다! 감사합니다^^</div>
+            <button class="copy-btn" onclick="copyText(this)">📋 복사하기</button>
+        </div>
+    </div>
+
+    <div class="card" data-template="rental">
+        <div class="card-header" onclick="toggleCard(this)">
+            <div class="card-label">
+                <div class="card-emoji">👰</div>
+                <div>
+                    <div class="card-title">혼주 가발 대여 가격</div>
+                    <div class="card-subtitle">혼주 가발 빌릴 수 있나요?</div>
+                </div>
+            </div>
+            <div class="card-arrow">▶</div>
+        </div>
+        <div class="card-body">
+            <div class="template-text">안녕하세요^^ 문의 주셔서 감사합니다. 혼주 여성 가발 대여의 경우 제품만 대여는 30만원, 업스타일 완제품은 35만원, 남성 혼주 가발 대여의 경우 14만 9천원 부분 가발 대여는 19만 9천원이며 보증금 10만원 있습니다. 자세한 상담을 원하실 경우 전달드린 [상담 신청 설문지]를 작성해주시면 확인 후 개별로 연락 드릴 예정입니다! 감사합니다^^</div>
+            <button class="copy-btn" onclick="copyText(this)">📋 복사하기</button>
+        </div>
+    </div>
+
+    <!-- Price Reference -->
+    <div class="divider">— 가격 참고 —</div>
+
+    <div class="price-section">
+        <h3>제품 가격</h3>
+        <table class="price-table">
+            <tr><th>제품</th><th>가격</th></tr>
+            <tr><td>한줄 앞머리 가발</td><td>35만원~</td></tr>
+            <tr><td>혼주 여성 (제품만 대여)</td><td>30만원</td></tr>
+            <tr><td>혼주 여성 (업스타일 완제품)</td><td>35만원</td></tr>
+            <tr><td>혼주 남성 가발 대여</td><td>14.9만원</td></tr>
+            <tr><td>혼주 남성 부분가발 대여</td><td>19.9만원</td></tr>
+        </table>
+    </div>
+
+    <div class="price-section">
+        <h3>상담 요금</h3>
+        <table class="price-table">
+            <tr><th>방식</th><th>요금</th></tr>
+            <tr><td>전화 상담</td><td>무료</td></tr>
+            <tr><td>영상 상담 (최초 10분)</td><td>2만원</td></tr>
+            <tr><td>영상 상담 (10분 추가당)</td><td>+1만원</td></tr>
+            <tr><td>매장 방문 (20분)</td><td>3만원</td></tr>
+        </table>
+    </div>
+
+    <div class="footer">
+        김앤장가발 내부용 · 외부 공유 금지
+    </div>
+
+</div>
+
+<script>
+function toggleCard(header) {
+    const card = header.parentElement;
+    card.classList.toggle('open');
+}
+
+function copyText(btn) {
+    const text = btn.previousElementSibling.textContent;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => showCopied(btn));
+    } else {
+        // Fallback for older mobile browsers
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showCopied(btn);
+    }
+}
+
+function showCopied(btn) {
+    btn.classList.add('copied');
+    btn.innerHTML = '✅ 복사 완료!';
+    setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = '📋 복사하기';
+    }, 1500);
+}
+</script>
+
+</body>
+</html>
